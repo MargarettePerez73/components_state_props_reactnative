@@ -35,7 +35,6 @@ export default function CounterLocker() {
 
       <View style={styles.displayBox}>
         <ThemedText type="subtitle">Count:</ThemedText>
-        <ThemedText>  </ThemedText>
         <ThemedText type="title" style={styles.countDisplay}>
           {count}
         </ThemedText>
