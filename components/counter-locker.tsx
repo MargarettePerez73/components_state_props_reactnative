@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { ThemedView } from './themed-view';
 import { ThemedText } from './themed-text';
 
 export default function CounterLocker() {
   const [count, setCount] = useState(0);
+  
+  const timerRef = useRef(null);
 
-  const handleAdd = () => setCount(count + 1);
-  const handleMinus = () => setCount(count - 1);
+  const handleAdd = () => setCount((prev) => prev + 1);
+  const handleMinus = () => setCount((prev) => prev - 1);
   const handleReset = () => setCount(0);
+
+  const startCounter = (action) => {
+    action();
+
+    timerRef.current = setTimeout(() => {
+      timerRef.current = setInterval(() => {
+        action();
+      }, 100);
+    }, 500);
+  };
+
+  // Stops the loop when button is released
+  const stopCounter = () => {
+    clearTimeout(timerRef.current);
+    clearInterval(timerRef.current);
+  };
 
   return (
     <ThemedView style={styles.container}>
@@ -24,11 +42,20 @@ export default function CounterLocker() {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Pressable style={[styles.button, styles.addButton]} onPress={handleAdd}>
+        {/* Use onPressIn and onPressOut instead of onPress */}
+        <Pressable 
+          style={[styles.button, styles.addButton]} 
+          onPressIn={() => startCounter(handleAdd)}
+          onPressOut={stopCounter}
+        >
           <Text style={styles.buttonText}>Add Count</Text>
         </Pressable>
 
-        <Pressable style={[styles.button, styles.minusButton]} onPress={handleMinus}>
+        <Pressable 
+          style={[styles.button, styles.minusButton]} 
+          onPressIn={() => startCounter(handleMinus)}
+          onPressOut={stopCounter}
+        >
           <Text style={styles.buttonText}>Minus Count</Text>
         </Pressable>
 
@@ -42,8 +69,8 @@ export default function CounterLocker() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    borderRadius: 12,
+    padding: 25,
+    borderRadius: 18,
     gap: 20,
     alignItems: 'center',
   },
@@ -75,13 +102,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButton: {
-    backgroundColor: '#34C759',
+    backgroundColor: '#f76ad6',
   },
   minusButton: {
     backgroundColor: '#FF3B30',
   },
   resetButton: {
-    backgroundColor: '#5856D6',
+    backgroundColor: '#898890',
   },
   buttonText: {
     color: '#FFFFFF',
