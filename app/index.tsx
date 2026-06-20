@@ -1,9 +1,9 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import CounterLocker from '@/components/counter-locker';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import CounterLocker from '@/components/counter-locker';
 import { Image } from 'expo-image';
+import { StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
   return (
@@ -18,7 +18,7 @@ export default function HomeScreen() {
       <ThemedText type="subtitle">Margarette Perez BSIT BA - 3303</ThemedText>
       <CounterLocker />
       <ThemedView style={styles.description}>
-        <ThemedText type="subtitle">Components and State and Props</ThemedText>
+        <ThemedText type="subtitle">Components, State and Props</ThemedText>
         <ThemedText>
           This is a simple example of a React Native app that uses components, state, and props.
         </ThemedText>
@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   description: {
+    borderColor: '#337AB7',
+    borderWidth: 2,
     gap: 8,
     marginBottom: 24,
     padding: 12,

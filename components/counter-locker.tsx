@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
-import { ThemedView } from './themed-view';
+import React, { useRef, useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { ThemedText } from './themed-text';
+import { ThemedView } from './themed-view';
 
 export default function CounterLocker() {
   const [count, setCount] = useState(0);
@@ -22,7 +22,6 @@ export default function CounterLocker() {
     }, 500);
   };
 
-  // Stops the loop when button is released
   const stopCounter = () => {
     clearTimeout(timerRef.current);
     clearInterval(timerRef.current);
@@ -36,13 +35,13 @@ export default function CounterLocker() {
 
       <View style={styles.displayBox}>
         <ThemedText type="subtitle">Count:</ThemedText>
+        <ThemedText>  </ThemedText>
         <ThemedText type="title" style={styles.countDisplay}>
           {count}
         </ThemedText>
       </View>
 
       <View style={styles.buttonContainer}>
-        {/* Use onPressIn and onPressOut instead of onPress */}
         <Pressable 
           style={[styles.button, styles.addButton]} 
           onPressIn={() => startCounter(handleAdd)}
@@ -80,14 +79,14 @@ const styles = StyleSheet.create({
   displayBox: {
     alignItems: 'center',
     gap: 8,
-    paddingVertical: 20,
-    paddingHorizontal: 40,
+    paddingVertical: 30,
+    paddingHorizontal: 70,
     borderRadius: 8,
     borderWidth: 2,
     borderColor: '#007AFF',
   },
   countDisplay: {
-    fontSize: 48,
+    fontSize: 40,
     fontWeight: 'bold',
   },
   buttonContainer: {
@@ -102,13 +101,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   addButton: {
-    backgroundColor: '#f76ad6',
+    backgroundColor: '#6acdf7',
   },
   minusButton: {
     backgroundColor: '#FF3B30',
   },
   resetButton: {
-    backgroundColor: '#898890',
+    backgroundColor: '#251781',
   },
   buttonText: {
     color: '#FFFFFF',
