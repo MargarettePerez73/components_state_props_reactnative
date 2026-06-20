@@ -1,11 +1,9 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
+import { ScrollView, StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import CounterLocker from '@/components/counter-locker';
+import { Image } from 'expo-image';
 
 export default function HomeScreen() {
   return (
@@ -18,60 +16,32 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
+        <ThemedText type="title">Counter Locker Demo</ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
 
+      <ThemedView style={styles.description}>
+        <ThemedText type="subtitle">State & Props Example</ThemedText>
         <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+          This component demonstrates React state management with useState hook. The count state is
+          managed internally and updated through button handlers.
         </ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
+
+      <CounterLocker />
+
+      <ThemedView style={styles.explanation}>
+        <ThemedText type="subtitle">How it works:</ThemedText>
         <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+         <ThemedText type="defaultSemiBold">useState</ThemedText> manages the count state
+        </ThemedText>
+        <ThemedText>
+         <ThemedText type="defaultSemiBold">Add Count</ThemedText> increments the counter
+        </ThemedText>
+        <ThemedText>
+         <ThemedText type="defaultSemiBold">Minus Count</ThemedText> decrements the counter
+        </ThemedText>
+        <ThemedText>
+          <ThemedText type="defaultSemiBold">Reset Count</ThemedText> sets counter back to 0
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
@@ -80,13 +50,20 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    marginBottom: 16,
   },
-  stepContainer: {
+  description: {
     gap: 8,
-    marginBottom: 8,
+    marginBottom: 24,
+    padding: 12,
+    borderRadius: 8,
+  },
+  explanation: {
+    gap: 8,
+    marginTop: 24,
+    padding: 12,
+    borderRadius: 8,
   },
   reactLogo: {
     height: 178,
